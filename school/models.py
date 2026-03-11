@@ -1,0 +1,30 @@
+from django.db import models
+
+
+class Teacher(models.Model):
+    name = models.CharField(max_length=30, verbose_name='Имя')
+    subject = models.CharField(max_length=50, verbose_name='Предмет')  # Увеличил длину до 50, так как предмет может быть длиннее
+
+    class Meta:
+        verbose_name = 'Учитель'
+        verbose_name_plural = 'Учителя'
+
+    def __str__(self):
+        return f"{self.name} ({self.subject})"  # Более информативное отображение
+
+
+class Student(models.Model):
+    name = models.CharField(max_length=30, verbose_name='Имя')
+    teachers = models.ManyToManyField(
+        Teacher, 
+        related_name='students', 
+        verbose_name='Учителя'
+    )
+    group = models.CharField(max_length=10, verbose_name='Класс')
+
+    class Meta:
+        verbose_name = 'Ученик'
+        verbose_name_plural = 'Ученики'
+
+    def __str__(self):
+        return f"{self.name} ({self.group})"  # Добавил класс для информативности

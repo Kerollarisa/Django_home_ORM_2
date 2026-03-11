@@ -1,14 +1,15 @@
-from django.views.generic import ListView
+from django.shortcuts import render
 from .models import Student
 
 
-class StudentList(ListView):
-    model = Student
-    template_name = 'school/students_list.html'
-    ordering = 'group'
+def students_list(request):
+    template = 'school/students_list.html'
     
-    def get_queryset(self):
-        # Переопределяем метод для оптимизации запросов
-        return Student.objects.all().order_by(self.ordering).prefetch_related('teachers')
+    # Оптимизированный запрос с prefetch_related
+    students = Student.objects.all().order_by('group').prefetch_related('teachers')
+    
+    context = {
+        'object_list': students,
+    }
 
-
+    return render(request, template, context)

@@ -74,8 +74,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'netology_orm_migrations',
-        'USER': 'postgresль',
-        'PASSWORD': 'postgres',  # Добавьте эту строку
+        'USER': 'пользователь',
+        'PASSWORD': 'пароль',  # Добавьте эту строку
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
